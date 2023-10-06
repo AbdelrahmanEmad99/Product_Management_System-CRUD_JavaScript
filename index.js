@@ -17,16 +17,24 @@ let mood = "create";
 let id;
 
 // get total
-const getTotal = () => {
-  if (price.value != "") {
-    let result = +price.value + +taxes.value + +ads.value - +discount.value;
-    total.innerHTML = result;
-    total.style.background = "#040";
+function getTotal() {
+  if (price.value != '') {
+    total.innerHTML = (+price.value + +taxes.value + +ads.value) - +discount.value;
+    if (total.innerHTML < 0) {
+      alert('The discount is too large, and the total would be negative. Please adjust the discount.');
+      discount.value = '';
+      total.innerHTML = '';
+      // Clear the input field
+      return;
+    }
+    // plus before it convert string to number
+    total.style.background = '#040';
   } else {
-    total.innerHTML = "";
-    total.style.background = "#a00d02";
+    total.innerHTML = '';
+    total.style.background = '#a00d02';
   }
-};
+}
+
 
 // create product
 let dataPro = [];
